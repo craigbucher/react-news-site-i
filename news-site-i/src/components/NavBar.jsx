@@ -1,5 +1,5 @@
 function NavBar({ items }) {
-    // const{items} = props
+    // const {items} = props
 
     const HandleNavBarClick = (value) => {
         console.log(value)
@@ -12,10 +12,9 @@ function NavBar({ items }) {
                 // sending by reference: HandleNavBarClick
                 // sending by reference with parameters: () => HandleNavBarClick(item.value)
                 <a key={item.label} onClick={() => HandleNavBarClick(item.value)}> {item.label}</a>
-
             ))
             }
         </div>
     )
 }
-export default NavBar
+export default NavBar;

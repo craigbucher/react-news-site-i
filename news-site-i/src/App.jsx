@@ -1,8 +1,11 @@
 import { useState } from 'react'
-import './App.css'
+
+// import './App.css'
+
 import NavBar from './components/NavBar'
-import Article from './components/Article'
 import ArticleTeaser from './components/ArticleTeaser'
+import Article from './components/Article'
+import ArticleGroup from './components/ArticleGroup'
 
 import NewsData from '../data/news.json'
 import NavItemsData from '../data/navItems.json'
@@ -13,26 +16,30 @@ const randomArticle = NewsData[randomArticleIndex];
 function App() {
 
   const [navItems, setNavItems] = useState(NavItemsData)
-  const [article, setArticle] = useState({
-    id: randomArticleIndex,
-    title: randomArticle.title,
-    abstract: randomArticle.abstract,
-    byline: randomArticle.byline,
-    image: randomArticle.multimedia.length ? randomArticle.multimedia[0] : null,
-    created_date: randomArticle.created_date
+  const [articles, setArticles] = useState(NewsData.map((article, index) => {
+    return {
+      id: index,
+      title: article.title,
+      abstract: article.abstract,
+      byline: article.byline,
+      image: article.multimedia.length ? article.multimedia[0] : null,
+      created_date: article.created_date
+    }
   })
+  )
 
   return (
-    <div className='App'>
+    <div className="App">
 
       <NavBar items={navItems} />
-      <ArticleTeaser id={article.id} title={article.title} date={article.created_date} />
-      <Article />
+
+      {articles.map((article) => (
+        <ArticleGroup key={article.id} article={article} />
+      ))
+      }
 
     </div>
   )
-
-
 }
 
 export default App
